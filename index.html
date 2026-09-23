@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASIVIS - Software Development & IT Consultancy Kenya</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0f3d3d;
+            --accent: #ff6b35;
+            --dark: #1a1a1a;
+            --light: #fafafa;
+            --grey: #666;
+            --border: #eee;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--dark);
+            line-height: 1.5;
+            background: white;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            margin-left: 2.5rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #0f3d3d 0%, #1a5f5f 50%, #ff6b35 100%);
+            background-size: 400% 400%;
+            color: white;
+            padding: 8rem 2rem;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-30px) translateX(30px); }
+        }
+
+        .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.3s;
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            left: 0;
+        }
+
+        /* Main */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        section {
+            margin: 6rem 0;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--grey);
+            max-width: 500px;
+            font-weight: 300;
+        }
+
+        /* Specializations */
+        .specializations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .spec-card {
+            background: white;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .spec-card:hover {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+
+        .spec-card-image {
+            width: 100%;
+            height: 180px;
+            display: block;
+            background: linear-gradient(135deg, var(--light) 0%, #f5f5f5 100%);
+            transition: all 0.4s;
+        }
+
+        .spec-card:hover .spec-card-image {
+            transform: scale(1.05);
+        }
+
+        .spec-card-content {
+            padding: 2rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .spec-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            font-weight: 700;
+            transition: color 0.3s;
+        }
+
+        .spec-card:hover h3 {
+            color: var(--accent);
+        }
+
+        .spec-card-main {
+            color: var(--grey);
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .spec-card-hidden {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: all 0.4s ease;
+            color: var(--grey);
+            font-size: 0.85rem;
+            font-weight: 300;
+            padding-bottom: 0;
+            line-height: 1.5;
+        }
+
+        .spec-card:hover .spec-card-hidden {
+            max-height: 150px;
+            opacity: 1;
+            padding-bottom: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+
+        .spec-overlay-tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s;
+            align-self: flex-start;
+        }
+
+        .spec-card:hover .spec-overlay-tag {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Services */
+        .services {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .service-box {
+            padding: 2rem;
+            background: white;
+            border-left: 3px solid var(--border);
+            text-align: left;
+            position: relative;
+            transition: all 0.3s;
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+
+        .service-box:hover {
+            border-left-color: var(--accent);
+            padding-left: 2.5rem;
+        }
+
+        .service-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--accent);
+            opacity: 0.2;
+            min-width: 60px;
+            line-height: 1;
+        }
+
+        .service-content {
+            flex: 1;
+        }
+
+        .service-box h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .service-box p {
+            color: var(--grey);
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        /* Certifications */
+        .certifications {
+            background: white;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+
+        .certifications h3 {
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-badge {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0;
+            text-align: center;
+            border: 2px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .cert-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: left 0.4s ease;
+            z-index: -1;
+        }
+
+        .cert-badge:hover::before {
+            left: 0;
+        }
+
+        .cert-badge:hover {
+            transform: translateY(-4px);
+        }
+
+        .cert-badge .cert-name {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .cert-badge:hover .cert-name {
+            color: white;
+        }
+
+        .cert-badge .cert-desc {
+            font-size: 0.75rem;
+            color: var(--grey);
+            transition: color 0.3s;
+            font-weight: 300;
+        }
+
+        .cert-badge:hover .cert-desc {
+            color: white;
+        }
+
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            color: var(--primary);
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .about-text p {
+            color: var(--grey);
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .about-list {
+            list-style: none;
+            margin-top: 2rem;
+        }
+
+        .about-list li {
+            padding: 0.7rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--dark);
+            font-weight: 300;
+            font-size: 0.95rem;
+        }
+
+        .about-list li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .about-image {
+            background: white;
+            height: 400px;
+            border-radius: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.05;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Team */
+        .team-section {
+            background: var(--light);
+            padding: 6rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .team-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 0;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .team-member:hover::before {
+            transform: scaleX(1);
+        }
+
+        .team-member:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            border-radius: 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover .team-avatar {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .team-member h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .team-member p {
+            color: var(--grey);
+            font-size: 0.9rem;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 6rem;
+        }
+
+        .footer-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0;
+            margin-bottom: 2rem;
+        }
+
+        .footer-contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .footer-contact-item {
+            padding: 1.5rem;
+        }
+
+        .footer-contact-item div:first-child {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-contact-item h4 {
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-contact-item p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .footer-contact-item a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-contact-item a:hover {
+            color: var(--accent);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            margin-bottom: 0.6rem;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin-left: 0;
+                margin-right: 1.5rem;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 4rem 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content {
+                text-align: center;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                height: 300px;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .service-box {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .service-number {
+                min-width: auto;
+            }
+
+            main {
+                padding: 1rem;
+            }
+
+            section {
+                margin: 3rem 0;
+            }
+
+            .team-section {
+                padding: 3rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M 15 30 L 27 65 L 40 30 L 52 65 L 37 85 L 22 85 Z" fill="#0f3d3d" stroke="#ff6b35" stroke-width="1.5"/>
+                    <circle cx="37" cy="42" r="6" fill="#ff6b35"/>
+                </svg>
+                ASIVIS
+            </div>
+            <nav>
+                <a href="#services">Services</a>
+                <a href="#specializations">Focus</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Enterprise Software for Mission-Critical Systems</h1>
+            <p>Healthcare, Retail, Education & Financial Services—built on security, performance, and proven expertise.</p>
+            <a href="#contact" class="cta-button">Let's Talk</a>
+        </div>
+    </section>
+
+    <main>
+        <!-- Specializations -->
+        <section id="specializations">
+            <div class="section-header">
+                <h2>Where We Excel</h2>
+                <p>Deep domain expertise across four critical sectors</p>
+            </div>
+
+            <div class="specializations">
+                <div class="spec-card">
+                    <svg class="spec-card-image" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="200" fill="#e8f4f8"/>
+                        <circle cx="200" cy="60" r="25" fill="#0f3d3d"/>
+                        <rect x="160" y="95" width="80" height="60" fill="#0f3d3d" rx="4"/>
+                        <rect x="130" y="100" width="15" height="50" fill="#ff6b35" rx="2"/>
+                        <rect x="255" y="105" width="15" height="45" fill="#ff6b35" rx="2"/>
+                    </svg>
+                    <div class="spec-card-content">
+                        <div>
+                            <h3>Healthcare Systems</h3>
+                            <p class="spec-card-main">Hospice and patient management platforms designed for clinical teams.</p>
+                        </div>
+                        <div>
+                            <p class="spec-card-hidden">DHA-certified solutions with HIPAA compliance, real-time reporting, and patient data security at the core.</p>
+                            <span class="spec-overlay-tag">DHA Certified</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card">
+                    <svg class="spec-card-image" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="200" fill="#fef3e8"/>
+                        <rect x="80" y="40" width="240" height="120" fill="#0f3d3d" rx="4"/>
+                        <rect x="100" y="60" width="70" height="80" fill="#ff6b35" rx="2"/>
+                        <rect x="185" y="60" width="70" height="80" fill="#ff6b35" rx="2"/>
+                        <rect x="270" y="60" width="70" height="80" fill="#ff6b35" rx="2"/>
+                    </svg>
+                    <div class="spec-card-content">
+                        <div>
+                            <h3>Retail Solutions</h3>
+                            <p class="spec-card-main">POS, inventory, and e-commerce systems that drive sales.</p>
+                        </div>
+                        <div>
+                            <p class="spec-card-hidden">Multi-channel integration, real-time inventory sync, and payment processing built for high-volume operations.</p>
+                            <span class="spec-overlay-tag">Enterprise-Grade</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card">
+                    <svg class="spec-card-image" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="200" fill="#f0e8f8"/>
+                        <rect x="60" y="30" width="280" height="140" fill="#0f3d3d" rx="4"/>
+                        <rect x="80" y="50" width="55" height="100" fill="#ff6b35" rx="2"/>
+                        <rect x="155" y="50" width="55" height="100" fill="#ff6b35" rx="2"/>
+                        <rect x="230" y="50" width="55" height="100" fill="#ff6b35" rx="2"/>
+                    </svg>
+                    <div class="spec-card-content">
+                        <div>
+                            <h3>Education Platforms</h3>
+                            <p class="spec-card-main">Learning management and student information systems.</p>
+                        </div>
+                        <div>
+                            <p class="spec-card-hidden">Scalable infrastructure supporting thousands of concurrent users with adaptive learning analytics.</p>
+                            <span class="spec-overlay-tag">Scalable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spec-card">
+                    <svg class="spec-card-image" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="400" height="200" fill="#e8f8f0"/>
+                        <circle cx="200" cy="100" r="50" fill="#0f3d3d"/>
+                        <path d="M 180 90 L 200 110 L 220 90" fill="none" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
+                        <path d="M 180 110 L 200 130 L 220 110" fill="none" stroke="#ff6b35" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <div class="spec-card-content">
+                        <div>
+                            <h3>Co-Banking Systems</h3>
+                            <p class="spec-card-main">Fintech and cooperative banking solutions with full compliance.</p>
+                        </div>
+                        <div>
+                            <p class="spec-card-hidden">PCI-DSS, CBK-compliant architecture with real-time settlement and fraud detection.</p>
+                            <span class="spec-overlay-tag">CBK Compliant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services">
+            <div class="section-header">
+                <h2>What We Build</h2>
+                <p>Comprehensive technology services from concept through operations</p>
+            </div>
+
+            <div class="services">
+                <div class="service-box">
+                    <div class="service-number">01</div>
+                    <div class="service-content">
+                        <h3>Custom Development</h3>
+                        <p>Bespoke software tailored to your workflows. Not a template, not a compromise—built exactly how you need it.</p>
+                    </div>
+                </div>
+
+                <div class="service-box">
+                    <div class="service-number">02</div>
+                    <div class="service-content">
+                        <h3>System Architecture</h3>
+                        <p>Enterprise systems designed for scale, reliability, and performance. We handle the complexity so you don't.</p>
+                    </div>
+                </div>
+
+                <div class="service-box">
+                    <div class="service-number">03</div>
+                    <div class="service-content">
+                        <h3>Security & Compliance</h3>
+                        <p>DHA, ISO 27001, PCI-DSS, GDPR—all standards met by design, audited and verified.</p>
+                    </div>
+                </div>
+
+                <div class="service-box">
+                    <div class="service-number">04</div>
+                    <div class="service-content">
+                        <h3>Data & Analytics</h3>
+                        <p>Real-time dashboards, business intelligence, and predictive analytics that drive decisions.</p>
+                    </div>
+                </div>
+
+                <div class="service-box">
+                    <div class="service-number">05</div>
+                    <div class="service-content">
+                        <h3>Integration Services</h3>
+                        <p>Seamless connections between your systems. We handle legacy, modern, and everything in between.</p>
+                    </div>
+                </div>
+
+                <div class="service-box">
+                    <div class="service-number">06</div>
+                    <div class="service-content">
+                        <h3>Mobile Solutions</h3>
+                        <p>Native iOS, Android, and cross-platform apps that extend your system to any device.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about">
+            <div class="section-header">
+                <h2>Who We Are</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>ASIVIS is a certified software development and IT consultancy firm headquartered in Kakamega, Kenya. We serve healthcare, retail, education, and financial organizations across Africa with mission-critical systems.</p>
+                    
+                    <p>We don't build generic software. Every system we deliver is engineered for your specific workflows, regulatory environment, and growth trajectory. Our team combines technical depth with domain expertise—we understand healthcare operations, retail dynamics, institutional education, and fintech compliance from the ground up.</p>
+
+                    <ul class="about-list">
+                        <li>DHA Certified Healthcare IT Provider</li>
+                        <li>ISO 27001 Information Security</li>
+                        <li>CBK Fintech Compliant</li>
+                        <li>PCI-DSS & GDPR Ready</li>
+                        <li>24/7 Operational Support</li>
+                    </ul>
+                </div>
+
+                <div class="about-image">
+                    <svg width="100%" height="100%" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#0f3d3d;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1a5f5f;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="100" r="35" fill="#ff6b35"/>
+                        <circle cx="120" cy="180" r="30" fill="#ff6b35"/>
+                        <circle cx="280" cy="180" r="30" fill="#ff6b35"/>
+                        <line x1="200" y1="140" x2="120" y2="210" stroke="#0f3d3d" stroke-width="2" opacity="0.3"/>
+                        <line x1="200" y1="140" x2="280" y2="210" stroke="#0f3d3d" stroke-width="2" opacity="0.3"/>
+                        <line x1="120" y1="210" x2="280" y2="210" stroke="#0f3d3d" stroke-width="2" opacity="0.3"/>
+                        <polyline points="100,300 150,270 200,255 250,270 300,280" fill="none" stroke="#ff6b35" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- Certifications -->
+            <div class="certifications">
+                <h3>Certifications & Standards</h3>
+                <div class="cert-grid">
+                    <div class="cert-badge">
+                        <div class="cert-name">DHA</div>
+                        <div class="cert-desc">Healthcare Provider</div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-name">ISO 27001</div>
+                        <div class="cert-desc">Information Security</div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-name">CBK</div>
+                        <div class="cert-desc">Fintech Compliant</div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-name">PCI-DSS</div>
+                        <div class="cert-desc">Payment Standards</div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-name">GDPR</div>
+                        <div class="cert-desc">Data Protection</div>
+                    </div>
+
+                    <div class="cert-badge">
+                        <div class="cert-name">AGILE</div>
+                        <div class="cert-desc">Development</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="team-container">
+            <div class="section-header">
+                <h2>Our Team</h2>
+                <p>Experts committed to delivering excellence</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="team-avatar">💼</div>
+                    <h4>Leadership</h4>
+                    <p>15+ years enterprise experience. Architects of large-scale systems across Africa.</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-avatar">🔧</div>
+                    <h4>Development</h4>
+                    <p>Full-stack engineers mastering modern stacks and legacy integration.</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-avatar">🛡️</div>
+                    <h4>Security & QA</h4>
+                    <p>Security specialists and QA engineers ensuring compliance and reliability.</p>
+                </div>
+
+                <div class="team-member">
+                    <div class="team-avatar">📱</div>
+                    <h4>Support</h4>
+                    <p>24/7 technical support and consulting for your mission-critical systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-top">
+            <div class="footer-contact-grid">
+                <div class="footer-contact-item">
+                    <div>📍</div>
+                    <h4>Location</h4>
+                    <p>P.O. Box 71718-00500<br>Kakamega, Kenya</p>
+                </div>
+                <div class="footer-contact-item">
+                    <div>📞</div>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+254713211668">+254 713 211 668</a></p>
+                </div>
+                <div class="footer-contact-item">
+                    <div>✉️</div>
+                    <h4>Email</h4>
+                    <p><a href="mailto:info@asivis.co.ke">info@asivis.co.ke</a><br><a href="mailto:sales@asivis.co.ke">sales@asivis.co.ke</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>ASIVIS</h4>
+                <p>Software Development & IT Consultancy</p>
+                <p>Kakamega, Kenya</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>Services</h4>
+                <a href="#services">Custom Development</a>
+                <a href="#services">System Architecture</a>
+                <a href="#services">Security & Compliance</a>
+                <a href="#services">Data & Analytics</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Industries</h4>
+                <a href="#specializations">Healthcare</a>
+                <a href="#specializations">Retail</a>
+                <a href="#specializations">Education</a>
+                <a href="#specializations">Financial Services</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>Standards</h4>
+                <a href="#about">DHA Certified</a>
+                <a href="#about">ISO 27001</a>
+                <a href="#about">PCI-DSS Compliant</a>
+                <a href="#about">GDPR Ready</a>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2024 ASIVIS. All rights reserved. Enterprise Software Solutions.</p>
+        </div>
+    </footer>
+</body>
+</html>
