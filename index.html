@@ -329,6 +329,45 @@
         .footer-bottom a { text-decoration: none; transition: color 0.3s; }
         .footer-bottom a:hover { color: var(--accent); }
 
+
+        /* Antigravity */
+        main, footer { position: relative; z-index: 1; }
+        .drifters { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+        .drifter { position: absolute; top: 0; left: 0; color: var(--ink); will-change: transform, opacity; opacity: 0; }
+        .drifter.ac { color: var(--accent); }
+        .drifter svg { width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.1; stroke-linecap: round; stroke-linejoin: round; display: block; overflow: visible; }
+
+        .par { transition: transform 0.9s var(--ease); }
+        .bob { animation: levitate 7s ease-in-out infinite; }
+        .bob.b2 { animation-duration: 8.5s; animation-delay: -2.5s; }
+        .bob.b3 { animation-duration: 6.2s; animation-delay: -4s; }
+        @keyframes levitate { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+        .shadow { fill: currentColor; stroke: none; opacity: 0.09; transform-box: fill-box; transform-origin: center; animation: shade 7s ease-in-out infinite; }
+        .shadow.s2 { animation-duration: 8.5s; animation-delay: -2.5s; }
+        .shadow.s3 { animation-duration: 6.2s; animation-delay: -4s; }
+        @keyframes shade { 0%, 100% { transform: scale(1); opacity: 0.09; } 50% { transform: scale(0.82); opacity: 0.045; } }
+
+        .spec-art { position: relative; }
+        .spec-art .wf { animation: levitate 6.5s ease-in-out infinite; }
+        .spec-card:nth-child(2) .spec-art .wf { animation-delay: -1.6s; }
+        .spec-card:nth-child(3) .spec-art .wf { animation-delay: -3.2s; }
+        .spec-card:nth-child(4) .spec-art .wf { animation-delay: -4.8s; }
+        .spec-art::after {
+            content: ''; display: block; width: 52%; height: 10px; margin: 12px auto 0; border-radius: 50%;
+            background: radial-gradient(ellipse at center, rgba(11,31,30,0.22), transparent 70%);
+            animation: shade 6.5s ease-in-out infinite;
+        }
+        .spec-card:hover .spec-art .wf { animation-duration: 3.5s; }
+        .step-art, .team-avatar svg { animation: levitate 5.5s ease-in-out infinite; }
+        .step:nth-child(2) .step-art, .team-member:nth-child(2) .team-avatar svg { animation-delay: -1.4s; }
+        .step:nth-child(3) .step-art, .team-member:nth-child(3) .team-avatar svg { animation-delay: -2.8s; }
+        .step:nth-child(4) .step-art, .team-member:nth-child(4) .team-avatar svg { animation-delay: -4.2s; }
+        .about-art .wf { animation: levitate 9s ease-in-out infinite; }
+        .cta-card { box-shadow: 0 50px 60px -40px rgba(11,31,30,0.45); }
+        .hero-art { will-change: transform; }
+
+        @media (max-width: 680px) { .drifter.hide-m { display: none; } }
+
         /* Responsive */
         @media (max-width: 1040px) {
             .specializations, .team-grid { grid-template-columns: repeat(2, 1fr); }
@@ -379,6 +418,7 @@
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
             .reveal { opacity: 1; transform: none; }
+            .drifter { opacity: 0.35; }
         }
     </style>
 </head>
@@ -423,20 +463,22 @@
                 </div>
 
                 <div class="hero-art" aria-hidden="true">
-                    <svg class="wf hero-wf" viewBox="0 0 560 500" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="wf hero-wf" viewBox="0 0 560 530" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
                                 <circle cx="1" cy="1" r="1" fill="currentColor" stroke="none" opacity="0.2"/>
                             </pattern>
                         </defs>
-                        <rect width="560" height="500" fill="url(#dots)" stroke="none"/>
+                        <rect width="560" height="530" fill="url(#dots)" stroke="none"/>
 
-                        <!-- top dimension -->
+                        <ellipse class="shadow s1" cx="250" cy="384" rx="170" ry="7"/>
+                        <ellipse class="shadow s2" cx="458" cy="456" rx="50" ry="6"/>
+                        <ellipse class="shadow s3" cx="110" cy="516" rx="46" ry="6"/>
+
+                        <g class="par" data-depth="14"><g class="bob b1">
                         <path class="d fine" d="M40 36H196M304 36H460M40 28V44M460 28V44"/>
                         <text class="lbl" x="250" y="40" text-anchor="middle">WEB PLATFORM</text>
-
-                        <!-- browser window -->
-                        <rect class="d" x="40" y="60" width="420" height="280" rx="8"/>
+                        <rect class="d solid" x="40" y="60" width="420" height="280" rx="8"/>
                         <path class="d" d="M40 96H460"/>
                         <circle class="d" cx="62" cy="78" r="4"/>
                         <circle class="d" cx="78" cy="78" r="4"/>
@@ -447,14 +489,15 @@
                         <rect class="d" x="166" y="112" width="84" height="52" rx="4"/>
                         <rect class="d" x="262" y="112" width="84" height="52" rx="4"/>
                         <rect class="d" x="358" y="112" width="84" height="52" rx="4"/>
-                        <path class="d" d="M178 130H208M178 144H196M274 130H304M274 144H292M370 130H400M370 144H388" />
+                        <path class="d" d="M178 130H208M178 144H196M274 130H304M274 144H292M370 130H400M370 144H388"/>
                         <path class="d fine" d="M166 236H440M166 276H440"/>
                         <path class="d" d="M166 190V316H440"/>
                         <path class="d ac" d="M166 292L214 268L262 278L310 236L358 246L406 212L440 200"/>
                         <circle class="d ac" cx="440" cy="200" r="4"/>
                         <rect class="d" x="62" y="296" width="62" height="28" rx="4"/>
+                        </g></g>
 
-                        <!-- phone -->
+                        <g class="par" data-depth="34"><g class="bob b2">
                         <rect class="d solid" x="400" y="190" width="116" height="230" rx="18"/>
                         <path class="d" d="M438 204H478"/>
                         <rect class="d" x="416" y="228" width="84" height="38" rx="5"/>
@@ -463,20 +506,18 @@
                         <circle class="d ac" cx="434" cy="247" r="7"/>
                         <path class="d" d="M450 242H486M450 253H474M450 295H486M450 343H474"/>
                         <path class="d" d="M446 402H470"/>
-
-                        <!-- phone dimension -->
                         <path class="d fine" d="M536 190V420M528 190H544M528 420H544"/>
                         <text class="lbl" transform="translate(556 305) rotate(-90)" text-anchor="middle">MOBILE</text>
+                        </g></g>
 
-                        <!-- shield -->
+                        <g class="par" data-depth="24"><g class="bob b3">
                         <path class="d" d="M110 392L156 408V440C156 462 136 476 110 486C84 476 64 462 64 440V408Z"/>
                         <path class="d ac" d="M90 438L106 454L132 424"/>
                         <text class="lbl" x="176" y="456">COMPLIANT BY DESIGN</text>
                         <text class="lbl" x="176" y="474">DHA · ISO 27001 · PCI-DSS</text>
-
-                        <!-- connector -->
                         <path class="dash" d="M156 424C270 424 330 400 396 380"/>
                         <circle class="dot-fill fade" cx="400" cy="378" r="4"/>
+                        </g></g>
                     </svg>
                 </div>
             </div>
@@ -888,6 +929,73 @@
                 targets.forEach(function (el) { io.observe(el); });
             } else {
                 targets.forEach(function (el) { el.classList.add('in'); });
+            }
+
+            // Antigravity: wireframe solids that rise on their own, faster than the scroll
+            var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var shapes = {
+                cube: '<path d="M40 8L72 26V62L40 80L8 62V26Z"/><path d="M40 44L8 26M40 44L72 26M40 44V80"/>',
+                ring: '<circle cx="40" cy="40" r="30"/><ellipse cx="40" cy="40" rx="30" ry="10"/><ellipse cx="40" cy="40" rx="10" ry="30"/>',
+                tri:  '<path d="M40 8L72 68H8Z"/><path d="M40 8V46M40 46L8 68M40 46L72 68"/>',
+                dia:  '<path d="M40 6L70 40L40 74L10 40Z"/><path d="M10 40H70M40 6V74"/><ellipse cx="40" cy="40" rx="30" ry="9"/>',
+                plus: '<path d="M40 22V58M22 40H58"/>',
+                orbit:'<circle cx="40" cy="40" r="30" stroke-dasharray="2 5"/><circle cx="70" cy="40" r="3"/>'
+            };
+            var cfg = [
+                { s: 'cube', x: 4,  y: 20, size: 96,  sp: 0.30, idle: 9,  rot: 5 },
+                { s: 'ring', x: 88, y: 45, size: 120, sp: 0.50, idle: 12, rot: -4 },
+                { s: 'tri',  x: 14, y: 78, size: 70,  sp: 0.22, idle: 7,  rot: 8,  ac: 1 },
+                { s: 'dia',  x: 78, y: 92, size: 84,  sp: 0.38, idle: 10, rot: -6 },
+                { s: 'plus', x: 46, y: 60, size: 40,  sp: 0.60, idle: 14, rot: 20, ac: 1, hm: 1 },
+                { s: 'orbit',x: 92, y: 8,  size: 64,  sp: 0.18, idle: 6,  rot: 10, hm: 1 },
+                { s: 'cube', x: 30, y: 105,size: 56,  sp: 0.55, idle: 13, rot: -9, hm: 1 },
+                { s: 'ring', x: 60, y: 30, size: 52,  sp: 0.26, idle: 8,  rot: 7,  ac: 1, hm: 1 }
+            ];
+            var layer = document.createElement('div');
+            layer.className = 'drifters';
+            layer.setAttribute('aria-hidden', 'true');
+            cfg.forEach(function (c, i) {
+                var el = document.createElement('div');
+                el.className = 'drifter' + (c.ac ? ' ac' : '') + (c.hm ? ' hide-m' : '');
+                el.style.width = el.style.height = c.size + 'px';
+                el.innerHTML = '<svg viewBox="0 0 80 80">' + shapes[c.s] + '</svg>';
+                c.el = el; c.ph = i * 1.7;
+                layer.appendChild(el);
+            });
+            document.body.insertBefore(layer, document.body.firstChild);
+
+            var heroArt = document.querySelector('.hero-art');
+            function frame(t) {
+                var vh = window.innerHeight, vw = window.innerWidth, H = vh + 240, sy = window.scrollY;
+                cfg.forEach(function (c) {
+                    var y = c.y / 100 * vh - sy * c.sp - (t / 1000) * c.idle;
+                    var p = (((y + 120) % H) + H) % H;
+                    var x = c.x / 100 * vw + Math.sin(t / 2600 + c.ph) * 16;
+                    var fade = Math.min(1, Math.min(p, H - p) / 140);
+                    c.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + (p - 120).toFixed(1) + 'px,0) rotate(' + ((t / 1000) * c.rot + sy * 0.03).toFixed(1) + 'deg)';
+                    c.el.style.opacity = (0.3 * fade).toFixed(3);
+                });
+                if (heroArt && sy < vh) heroArt.style.transform = 'translateY(' + (-sy * 0.12).toFixed(1) + 'px)';
+                if (!reduce) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+            if (reduce) window.addEventListener('scroll', function () { frame(0); }, { passive: true });
+
+            // Hero: pieces drift away from the cursor at different depths
+            var hero = document.querySelector('.hero');
+            var layers = hero.querySelectorAll('.par');
+            if (!reduce && window.matchMedia('(pointer: fine)').matches) {
+                hero.addEventListener('pointermove', function (e) {
+                    var r = hero.getBoundingClientRect();
+                    var nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+                    layers.forEach(function (l) {
+                        var d = +l.dataset.depth;
+                        l.style.transform = 'translate(' + (-nx * d).toFixed(1) + 'px,' + (-ny * d).toFixed(1) + 'px)';
+                    });
+                });
+                hero.addEventListener('pointerleave', function () {
+                    layers.forEach(function (l) { l.style.transform = ''; });
+                });
             }
         })();
     </script>
